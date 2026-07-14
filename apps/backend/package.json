@@ -4,19 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development tsx watch src/index.ts",
+    "dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@types/express-rate-limit": "^6.0.2",
     "@visit-control/api-zod": "workspace:*",
     "@visit-control/db": "workspace:*",
-    "@types/express-rate-limit": "^6.0.2",
     "bcryptjs": "^3.0.3",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "drizzle-orm": "catalog:",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.2",
