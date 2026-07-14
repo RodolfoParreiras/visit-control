@@ -26,7 +26,5 @@ catalog:
 autoInstallPeers: false
 
 onlyBuiltDependencies:
-  - '@swc/core'
   - esbuild
-  - msw
-  - unrs-resolver
+  - core-js
