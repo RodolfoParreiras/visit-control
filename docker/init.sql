@@ -121,20 +121,9 @@ CREATE TABLE IF NOT EXISTS label_config (
 );
 
 -- ── Dados iniciais ─────────────────────────────────────────────────────────────
-
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
--- Usuário administrador padrão (login: admin / senha: admin)
--- Hash gerado pelo pgcrypto em tempo de inicialização para evitar qualquer
--- corrupção de hash estático. bcryptjs aceita o prefixo $2a$ normalmente.
-INSERT INTO users (name, login, password_hash, role, status)
-VALUES ('Administrador', 'admin',
-        crypt('admin', gen_salt('bf', 10)),
-        'admin', 'active')
-ON CONFLICT (login) DO UPDATE
-  SET password_hash = crypt('admin', gen_salt('bf', 10)),
-      role   = 'admin',
-      status = 'active';
+-- O usuário administrador padrão é criado pelo backend no startup via bcryptjs
+-- (ver apps/backend/src/lib/seed.ts). Não inserimos aqui para evitar
+-- incompatibilidade de formato de hash entre pgcrypto e bcryptjs.
 
 -- Configuração de campos padrão
 INSERT INTO field_config (cpf, phone, company, city, responsible, reason, notes)

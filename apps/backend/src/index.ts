@@ -1,6 +1,7 @@
 import app from "./app";
 import { logger } from "./lib/logger";
 import { pool } from "@visit-control/db";
+import { seedAdminUser } from "./lib/seed";
 
 const rawPort = process.env["PORT"] ?? "3001";
 const port = Number(rawPort);
@@ -9,6 +10,9 @@ if (Number.isNaN(port) || port <= 0) {
   logger.fatal({ port: rawPort }, "Invalid PORT value");
   process.exit(1);
 }
+
+// Garante que o admin padrão existe antes de aceitar requisições
+await seedAdminUser();
 
 const server = app.listen(port, () => {
   logger.info({ port, env: process.env.NODE_ENV ?? "development" }, "🚀 Servidor iniciado");
