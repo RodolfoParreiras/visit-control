@@ -79,30 +79,14 @@ Edite o `.env` ajustando pelo menos estas variáveis:
 docker compose up -d --build
 ```
 
-Aguarde alguns segundos para o banco inicializar. A aplicação estará disponível em:
+Aguarde alguns segundos para o banco inicializar. O schema e o usuário administrador são criados automaticamente na primeira vez que o volume do banco for inicializado.
+
+A aplicação estará disponível em:
 
 - **http://seu-servidor** — Interface do sistema
 - **http://seu-servidor/api/health** — Health check da API
 
-### 5. Aplicar o schema do banco de dados
-
-Na primeira execução, aplique o schema:
-
-```bash
-# Instala as dependências localmente (necessário apenas para rodar as migrations)
-npm install -g pnpm
-pnpm install
-DATABASE_URL="postgresql://visit_user:SENHA@localhost:5432/visit_control" pnpm db:push
-```
-
-Ou via Docker:
-
-```bash
-docker compose exec backend node -e "
-  const { drizzle } = require('drizzle-orm/node-postgres');
-  // Execute as migrations manualmente se necessário
-"
-```
+Credenciais iniciais: **login:** `admin` / **senha:** `admin`
 
 ---
 
